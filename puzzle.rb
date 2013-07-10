@@ -3,10 +3,10 @@ class Puzzle
 
   SpecialChars = ['2','3','5','6','A','F']
 
-  def initialize
+  def initialize(solution_file)
     # 2,3,5,6,A,F in data.txt mark the cells to color in
     # no two different chars should be adjacent
-    @data = File.readlines("solution.txt").map!{|x| x.chomp.upcase.split(//)}
+    @data = File.readlines(solution_file).map!{|x| x.chomp.upcase.split(//)}
     @height = @data.size
     @width = @data.collect{|d| d.size}.max
     @data = @data.map!{|x| x + [" "]*(@width-x.size)}
@@ -32,11 +32,12 @@ class Puzzle
   end
 end
 
-p = Puzzle.new
+p = Puzzle.new("solution.txt")
+texTable = ""
 p.puzzle.each do |m|
   m.each do |n|
-    print n
-    print " "
+    texTable << n.to_str + " & "
   end
-  print "\n"
+  texTable << "\\\\\n"
 end
+print texTable
