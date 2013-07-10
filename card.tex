@@ -1,0 +1,50 @@
+\documentclass[10pt]{scrbook}
+\usepackage{ticket}
+\usepackage{graphicx}
+\usepackage[noheadfoot,nomarginpar,margin=0pt,paperwidth=90mm,paperheight=52mm]{geometry}
+\usepackage{color}
+\usepackage[utf8]{inputenc}
+
+\ticketNumbers{1}{1}
+
+\unitlength=1mm
+
+\ticketSize{90}{52} %in unitlength
+\ticketDistance{0}{0} %in unitlength
+
+%adjust these margins using the 'boxed' option with ticket, e.g. \usepackage[boxed]{ticket}
+\advance \voffset -0.35cm
+\advance \hoffset -.01cm
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Here we set top and left margins found from the Avery Word-template (page setup margins)  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% define something
+\definecolor{darkgreen}{RGB}{25,130,20}
+
+% make your default ticket. \ticketdefault is somewhat like a background
+% here it is empty, because we use different tickets for the front an
+% the back of our card
+\renewcommand{\ticketdefault}{%
+}
+
+
+
+\pagestyle{empty}
+\parindent=0pt
+
+\begin{document}
+\sffamily
+
+{\ticket{
+    \put(8,47){\color{darkgreen}\rule{63mm}{0.2mm}}
+    \put(20,5){\color{darkgreen}\rule{63mm}{0.2mm}}
+    \put(52,8){\includegraphics[width=35mm]{qrcode.pdf}}
+    \put(8,40){\LARGE Steven Clontz}
+    \put(8,35){\color{darkgreen}www.stevenclontz.com}
+    \put(8,12){\small {\color{darkgreen}Email:} steven.clontz@gmail.com}
+    \put(8,8){\small {\color{darkgreen}Github:} @StevenClontz}
+ }
+
+\end{document}
