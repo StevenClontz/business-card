@@ -1,9 +1,13 @@
 \documentclass[10pt]{scrbook}
 \usepackage{ticket}
+\usepackage{graphics}
 \usepackage{graphicx}
 \usepackage[noheadfoot,nomarginpar,margin=0pt,paperwidth=90mm,paperheight=52mm]{geometry}
 \usepackage{color}
-\usepackage[utf8]{inputenc}
+
+\usepackage{paratype}
+\renewcommand*\familydefault{\sfdefault} %% Only if the base font of the document is to be sans serif
+\usepackage[T1]{fontenc}
 
 \ticketNumbers{1}{1}
 
@@ -13,8 +17,8 @@
 \ticketDistance{0}{0} %in unitlength
 
 %adjust these margins using the 'boxed' option with ticket, e.g. \usepackage[boxed]{ticket}
-\advance \voffset -0.35cm
-\advance \hoffset -.01cm
+\advance \voffset -3.5mm
+\advance \hoffset -0.1mm
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Here we set top and left margins found from the Avery Word-template (page setup margins)  %
@@ -22,6 +26,8 @@
 
 % define something
 \definecolor{darkgreen}{RGB}{25,130,20}
+\definecolor{lightgray}{RGB}{112,112,112}
+\definecolor{darkgray}{RGB}{64,64,64}
 
 % make your default ticket. \ticketdefault is somewhat like a background
 % here it is empty, because we use different tickets for the front an
@@ -29,6 +35,35 @@
 \renewcommand{\ticketdefault}{%
 }
 
+\newcommand{\puzzle}{
+    \color{lightgray}
+    \setlength\tabcolsep{1pt}
+    \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}\hline
+    19 & 13 & 31 & 83 & 97 & 91 & 21 & 81 & 41 & 21 & 33 & 97 & 23 & 97 & 17 & 37 & 79 & 77 & 55 & 83 & 35 & 23 & 65 & 77 & 73 & 83 & 43 & 11 & 77 \\\hline
+    67 & 59 & 23 & 41 & 49 & 19 & 63 & 61 & 99 & 89 & 93 & 23 & 89 & 77 & 17 & 31 & 89 & 17 & 65 & 43 & 25 & 61 & 85 & 61 & 53 & 89 & 23 & 19 & 67 \\\hline
+    91 & 49 & 13 & 71 & 17 & 13 & 33 & 41 & 63 & 89 & 93 & 67 & 67 & 17 & 29 & 23 & 89 & 17 & 35 & 73 & 55 & 37 & 55 & 43 & 43 & 41 & 47 & 83 & 83 \\\hline
+    61 & 41 & 73 & 31 & 83 & 29 & 51 & 23 & 51 & 23 & 39 & 59 & 59 & 49 & 97 & 79 & 89 & 11 & 35 & 67 & 85 & 79 & 65 & 83 & 49 & 71 & 73 & 67 & 49 \\\hline
+    89 & 23 & 41 & 19 & 61 & 31 & 39 & 89 & 57 & 53 & 33 & 83 & 37 & 29 & 13 & 97 & 13 & 13 & 19 & 25 & 25 & 25 & 49 & 79 & 43 & 49 & 53 & 73 & 59 \\\hline
+    67 & 61 & 31 & 53 & 71 & 47 & 89 & 13 & 97 & 71 & 61 & 67 & 11 & 97 & 29 & 59 & 67 & 29 & 89 & 31 & 13 & 91 & 43 & 17 & 59 & 89 & 53 & 37 & 89 \\\hline
+    17 & 52 & 14 & 94 & 49 & 47 & 29 & 48 & 96 & 18 & 71 & 79 & 32 & 86 & 43 & 28 & 28 & 83 & 80 & 40 & 70 & 50 & 40 & 31 & 41 & 26 & 98 & 82 & 52 \\\hline
+    26 & 71 & 71 & 29 & 67 & 47 & 66 & 47 & 13 & 91 & 54 & 37 & 74 & 53 & 44 & 13 & 58 & 49 & 40 & 79 & 13 & 97 & 97 & 43 & 82 & 71 & 59 & 53 & 49 \\\hline
+    22 & 13 & 17 & 44 & 56 & 29 & 24 & 66 & 54 & 48 & 18 & 41 & 44 & 89 & 34 & 79 & 64 & 97 & 20 & 10 & 40 & 70 & 61 & 11 & 58 & 64 & 94 & 32 & 52 \\\hline
+    56 & 71 & 17 & 43 & 64 & 19 & 72 & 19 & 13 & 61 & 24 & 77 & 14 & 79 & 34 & 91 & 46 & 59 & 50 & 71 & 19 & 53 & 17 & 83 & 89 & 77 & 67 & 29 & 68 \\\hline
+    17 & 68 & 64 & 16 & 29 & 71 & 18 & 37 & 97 & 79 & 42 & 29 & 94 & 59 & 52 & 97 & 82 & 41 & 70 & 10 & 20 & 20 & 40 & 37 & 22 & 32 & 64 & 92 & 17 \\\hline
+    59 & 19 & 19 & 13 & 97 & 13 & 59 & 59 & 59 & 73 & 61 & 17 & 43 & 61 & 17 & 47 & 23 & 23 & 89 & 23 & 59 & 83 & 53 & 49 & 13 & 19 & 41 & 47 & 17 \\\hline
+    53 & 43 & 11 & 71 & 19 & 77 & 57 & 93 & 63 & 99 & 99 & 13 & 37 & 23 & 29 & 11 & 71 & 49 & 35 & 35 & 65 & 55 & 43 & 89 & 49 & 79 & 67 & 11 & 89 \\\hline
+    49 & 71 & 53 & 79 & 41 & 79 & 77 & 29 & 57 & 23 & 67 & 11 & 67 & 47 & 79 & 43 & 41 & 47 & 65 & 91 & 11 & 43 & 55 & 71 & 79 & 23 & 11 & 49 & 61 \\\hline
+    19 & 97 & 43 & 37 & 67 & 67 & 49 & 13 & 57 & 59 & 59 & 43 & 83 & 59 & 77 & 47 & 23 & 73 & 95 & 55 & 95 & 55 & 85 & 67 & 13 & 91 & 37 & 47 & 47 \\\hline
+    31 & 71 & 43 & 59 & 37 & 73 & 11 & 29 & 99 & 67 & 97 & 83 & 83 & 53 & 83 & 59 & 43 & 61 & 95 & 59 & 83 & 43 & 55 & 37 & 19 & 41 & 43 & 53 & 61 \\\hline
+    23 & 59 & 77 & 29 & 29 & 67 & 53 & 71 & 93 & 29 & 79 & 53 & 67 & 47 & 77 & 13 & 77 & 53 & 95 & 55 & 65 & 85 & 61 & 89 & 61 & 49 & 17 & 23 & 29 \\\hline
+    83 & 31 & 41 & 29 & 13 & 29 & 13 & 59 & 17 & 17 & 47 & 79 & 19 & 79 & 59 & 31 & 77 & 19 & 43 & 71 & 53 & 47 & 23 & 43 & 73 & 31 & 47 & 43 & 83 \\\hline
+    47 & 41 & 13 & 29 & 47 & 47 & 69 & 89 & 77 & 31 & 99 & 71 & 71 & 37 & 29 & 67 & 31 & 17 & 23 & 59 & 37 & 71 & 19 & 49 & 13 & 37 & 53 & 77 & 79 \\\hline
+    41 & 43 & 91 & 31 & 47 & 77 & 27 & 77 & 97 & 31 & 69 & 49 & 71 & 59 & 61 & 17 & 37 & 13 & 61 & 83 & 53 & 83 & 71 & 23 & 67 & 47 & 97 & 29 & 41 \\\hline
+    31 & 61 & 89 & 71 & 89 & 79 & 27 & 87 & 39 & 69 & 93 & 11 & 11 & 19 & 19 & 53 & 17 & 73 & 11 & 89 & 47 & 67 & 53 & 23 & 61 & 47 & 47 & 67 & 49 \\\hline
+    61 & 77 & 67 & 41 & 49 & 89 & 69 & 79 & 49 & 59 & 51 & 31 & 47 & 67 & 73 & 83 & 23 & 13 & 83 & 37 & 97 & 29 & 89 & 47 & 47 & 13 & 71 & 11 & 43 \\\hline
+    41 & 71 & 73 & 89 & 37 & 43 & 21 & 23 & 79 & 19 & 87 & 13 & 67 & 23 & 23 & 41 & 77 & 71 & 73 & 29 & 67 & 83 & 31 & 47 & 67 & 83 & 31 & 71 & 61 \\\hline
+    \end{tabular}
+}
 
 
 \pagestyle{empty}
@@ -37,14 +72,19 @@
 \begin{document}
 \sffamily
 
-{\ticket{
-    \put(8,47){\color{darkgreen}\rule{63mm}{0.1mm}}
-    \put(20,5){\color{darkgreen}\rule{63mm}{0.1mm}}
-    \put(52,8){\includegraphics[width=35mm]{qrcode.pdf}}
+\ticket{
+    \put(6,46){\color{darkgreen}\rule{58.5mm}{0.1mm}}
+    \put(25.5,6){\color{darkgreen}\rule{58.5mm}{0.1mm}}
+    \put(52,8){\includegraphics[height=36mm]{qrcode.pdf}}
     \put(8,40){\LARGE Steven Clontz}
     \put(8,35){\color{darkgreen}www.stevenclontz.com}
     \put(8,12){\small {\color{darkgreen}Email:} steven.clontz@gmail.com}
     \put(8,8){\small {\color{darkgreen}Github:} @StevenClontz}
  }
+
+\ticket{
+    \put(15,27){\resizebox{60mm}{18mm}{\puzzle}}
+    \put(30,6){\tiny Shade the numbers hiding 2s, 3s, and 5s}
+}
 
 \end{document}

@@ -1,12 +1,12 @@
 class Puzzle
-  attr_reader :puzzle
+  attr_reader :puzzle, :width
 
   SpecialChars = ['2','3','5','6','A','F']
 
-  def initialize(solution_file)
+  def initialize(solutionFile)
     # 2,3,5,6,A,F in data.txt mark the cells to color in
     # no two different chars should be adjacent
-    @data = File.readlines(solution_file).map!{|x| x.chomp.upcase.split(//)}
+    @data = File.readlines(solutionFile).map!{|x| x.chomp.upcase.split(//)}
     @height = @data.size
     @width = @data.collect{|d| d.size}.max
     @data = @data.map!{|x| x + [" "]*(@width-x.size)}
@@ -15,29 +15,34 @@ class Puzzle
         if [2,3,5,6,10,15].include? n.hex
           randomMatch(n.hex)
         else
-          noMatch
+          randomMatch(1)
         end
       }
     }
   end
 
-  def randomMatch(num)
-    candidates = [*10...100].keep_if {|x| x % num == 0}
-    candidates.sample
+  def puzzleStr
+    @puzzle.
+      map {|line| line.join(" & ")}.
+      join(" \\\\\\hline\n")
   end
 
-  def noMatch
-    candidates = [*10...100].delete_if {|x| x % 2 == 0 or x % 3 == 0 or x % 5 == 0}
-    candidates.sample
+  def randomMatch(num)
+    candidates = [*10...100]
+    if num % 2 != 0
+      candidates.delete_if {|x| x%2 == 0}
+    end
+    if num % 3 != 0
+      candidates.delete_if {|x| x%3 == 0}
+    end
+    if num % 5 != 0
+      candidates.delete_if {|x| x%5 == 0}
+    end
+    candidates.keep_if {|x| x%num == 0}.sample
   end
 end
 
 p = Puzzle.new("solution.txt")
-texTable = ""
-p.puzzle.each do |m|
-  m.each do |n|
-    texTable << n.to_str + " & "
-  end
-  texTable << "\\\\\n"
-end
-print texTable
+puts "\\begin{tabular}{|" + "c|"*p.width + "}\\hline"
+puts p.puzzleStr
+puts "\\hline\n\\end{tabular}"
