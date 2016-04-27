@@ -1,48 +1,37 @@
+require 'rqrcode'
+
 class Puzzle
-  attr_reader :puzzle, :width
+  attr_reader :puzzle, :data, :qrcode
 
-  SpecialChars = ['2','3','5','6','A','F']
-
-  def initialize(solutionFile)
-    # 2,3,5,6,A,F in data.txt mark the cells to color in
-    # no two different chars should be adjacent
-    @data = File.readlines(solutionFile).map!{|x| x.chomp.upcase.split(//)}
-    @height = @data.size
-    @width = @data.collect{|d| d.size}.max
-    @data = @data.map!{|x| x + [" "]*(@width-x.size)}
+  def initialize
+    @qrcode = RQRCode::QRCode.new("clontz.org/crd", size: 2)
+    @data = @qrcode.to_s.split("\n").map{|line| line.split("")}
+    @size = @data.size
     @puzzle = @data.map { |m|
       m.map { |n|
-        if [2,3,5,6,10,15].include? n.hex
-          randomMatch(n.hex)
+        if n.upcase=="X"
+          9*(2..10).to_a.sample
         else
-          randomMatch(1)
+          9*(1..10).to_a.sample+(1..8).to_a.sample
         end
       }
     }
   end
 
-  def puzzleStr
-    @puzzle.
-      map {|line| line.join(" & ")}.
-      join(" \\\\\\hline\n")
-  end
-
-  def randomMatch(num)
-    candidates = [*10...100]
-    if num % 2 != 0
-      candidates.delete_if {|x| x%2 == 0}
+  def puzzle_tex
+    str = '\begin{tikzpicture}'+"\n"
+    str += '\draw[step=1em,gray,very thin] (0,0) grid '+"(#{@size.to_s}em,#{@size.to_s}em);\n"
+    @puzzle.each_with_index do |line, i|
+      line.each_with_index do |entry, j|
+        reverse_i = (@size-i) % @size
+        str += "\\node at (#{i}.5em,#{@size-j-1}.5em) {\\scriptsize #{entry}};\n"
+      end
     end
-    if num % 3 != 0
-      candidates.delete_if {|x| x%3 == 0}
-    end
-    if num % 5 != 0
-      candidates.delete_if {|x| x%5 == 0}
-    end
-    candidates.keep_if {|x| x%num == 0}.sample
+    str += '\end{tikzpicture}'+"\n"
+    return str
   end
 end
 
-p = Puzzle.new("solution.txt")
-puts "\\begin{tabular}{|" + "c|"*p.width + "}\\hline"
-puts p.puzzleStr
-puts "\\hline\n\\end{tabular}"
+puzzle = Puzzle.new
+File.open('qrcode.txt', 'w') { |file| file.write(puzzle.qrcode.to_s) }
+File.open('puzzle.tex', 'w') { |file| file.write(puzzle.puzzle_tex) }
