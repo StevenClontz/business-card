@@ -4,7 +4,7 @@ class Puzzle
   attr_reader :puzzle, :data, :qrcode
 
   def initialize
-    @qrcode = RQRCode::QRCode.new("clontz.org/crd", size: 2)
+    @qrcode = RQRCode::QRCode.new("clontz.org/foo", size: 2)
     @data = @qrcode.to_s.split("\n").map{|line| line.split("")}
     @size = @data.size
     @puzzle = @data.map { |m|
@@ -34,4 +34,8 @@ end
 
 puzzle = Puzzle.new
 File.open('qrcode.txt', 'w') { |file| file.write(puzzle.qrcode.to_s) }
+File.open('qrcode.svg', 'w') { |file| file.write(puzzle.qrcode.as_svg(
+                    offset: 0, color: '000', 
+                    shape_rendering: 'crispEdges',
+                    module_size: 11))}
 File.open('puzzle.tex', 'w') { |file| file.write(puzzle.puzzle_tex) }
