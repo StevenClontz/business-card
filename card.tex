@@ -4,6 +4,7 @@
 \usepackage{graphicx}
 \usepackage[noheadfoot,nomarginpar,margin=0pt,paperwidth=90mm,paperheight=52mm]{geometry}
 \usepackage{color}
+\usepackage{amsthm}
 
 \usepackage{paratype}
 \renewcommand*\familydefault{\sfdefault} %% Only if the base font of the document is to be sans serif
@@ -65,6 +66,21 @@
     \end{tabular}
 }
 
+\newcommand{\theorem}{\tiny%
+    \textbf{%
+      Theorem: An integer is a multiple of nine iff the sum of
+      its digits is a multiple of nine.
+    }\newline
+    \textit{Proof:}
+    Express the integer as the sum of its digits:
+    \(d_0+10d_1+100d_2+\dots+10^nd_n\).
+    This may be grouped into the sum of its digits
+    \(d_0+d_1+\dots+d_n\) plus the expression
+    \(9d_1+99d_2+\dots+(10^n-1)d_n\). Since each
+    \((10^i-1)d_i\) is divisible by 9, the result
+    follows.\(\qed\)
+}
+
 
 \pagestyle{empty}
 \parindent=0pt
@@ -73,18 +89,19 @@
 \sffamily
 
 \ticket{
-    \put(6,46){\color{darkgreen}\rule{58.5mm}{0.1mm}}
-    \put(25.5,6){\color{darkgreen}\rule{58.5mm}{0.1mm}}
-    \put(52,8){\includegraphics[height=36mm]{qrcode.pdf}}
-    \put(8,40){\LARGE Steven Clontz}
-    \put(8,35){\color{darkgreen}www.stevenclontz.com}
-    \put(8,12){\small {\color{darkgreen}Email:} steven.clontz@gmail.com}
-    \put(8,8){\small {\color{darkgreen}Github:} @StevenClontz}
+    \put(6,46){\color{darkgreen}\rule{58mm}{0.1mm}}
+    \put(25,6){\color{darkgreen}\rule{58mm}{0.1mm}}
+    % \put(52,8){\includegraphics[height=36mm]{qrcode.pdf}}
+    \put(8,38){\LARGE Steven Clontz}
+    \put(8,32){\Large \color{darkgreen}mathematician, professor,}
+    \put(8,26){\Large \color{darkgreen}programmer, puzzler}
+    \put(8,13){\makebox[72mm]{\hfill steven.clontz\color{darkgreen}@gmail.com} }
+    \put(8,9){\makebox[72mm]{\hfill{\color{darkgreen}http://}clontz.org} }
  }
 
 \ticket{
-    \put(15,27){\resizebox{60mm}{18mm}{\puzzle}}
-    \put(30,6){\tiny Shade the numbers hiding 2s, 3s, and 5s}
+    % \put(15,27){\resizebox{60mm}{18mm}{\puzzle}}
+    \put(6,27){\parbox{32mm}{\theorem}}
 }
 
 \end{document}
