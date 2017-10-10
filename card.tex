@@ -25,11 +25,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Here we set top and left margins found from the Avery Word-template (page setup margins)  %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+%
 % define something
-\definecolor{darkgreen}{RGB}{25,130,20}
-\definecolor{lightgray}{RGB}{112,112,112}
-\definecolor{darkgray}{RGB}{64,64,64}
+\definecolor{mainColor}{RGB}{0,32,91}
+\definecolor{secondaryColor}{RGB}{191,13,62}
 
 % make your default ticket. \ticketdefault is somewhat like a background
 % here it is empty, because we use different tickets for the front an
@@ -43,17 +42,18 @@
 
 \newcommand{\theorem}{\scriptsize%
     \textbf{%
-      Theorem: An integer is a multiple of nine iff the sum of
-      its digits is a multiple of nine.
+      Theorem: An integer is a multiple of nine if and only if
+      the sum of its digits is a multiple of nine.
     }\newline
     \textit{Proof:}
     Express the integer in terms of its digits:
     \(d_0+10d_1+100d_2+\dots+10^nd_n\).
     This may be grouped into the sum of its digits
     \(d_0+d_1+\dots+d_n\) plus the sum
-    \(9d_1+99d_2+\dots+(10^n-1)d_n\). Since each
-    \(10^i-1\) is divisible by 9, the result
-    follows.\(\qed\) {\color{gray} clontz.org/card}
+    \((10-1)d_1+(100-1)d_2+\dots+(10^n-1)d_n\). Since each
+    \(10^i-1\) is divisible by nine...
+
+    \hfill{\color{gray} clontz.org/card}
 }
 
 
@@ -64,19 +64,19 @@
 \sffamily
 
 \ticket{
-    \put(6,46){\color{darkgreen}\rule{58mm}{0.1mm}}
-    \put(25,6){\color{darkgreen}\rule{58mm}{0.1mm}}
+    \put(6,46){\color{mainColor}\rule{58mm}{0.2mm}}
+    \put(25,6){\color{mainColor}\rule{58mm}{0.2mm}}
     % \put(52,8){\includegraphics[height=36mm]{qrcode.pdf}}
-    \put(8,38){\LARGE Steven Clontz}
-    \put(8,32){\Large \color{darkgreen}mathematician, professor,}
-    \put(8,26){\Large \color{darkgreen}programmer, puzzler}
-    \put(8,13){\makebox[72mm]{\hfill steven.clontz\color{darkgreen}@gmail.com} }
-    \put(8,9){\makebox[72mm]{\hfill{\color{darkgreen}http://}clontz.org} }
+    \put(8,38){\LARGE\color{mainColor} Steven Clontz}
+    \put(8,33){\color{secondaryColor}mathematician, professor, puzzler}
+    \put(8,9){\makebox[72mm]{\hfill\color{mainColor} steven.clontz\color{secondaryColor}@gmail.com} }
+    \put(8,13){\makebox[72mm]{\hfill\color{mainColor}{\color{secondaryColor}http://}clontz.org} }
  }
 
 \ticket{
-    \put(39,3.5){\scalebox{0.5}{\color{gray}\puzzle}}
-    \put(6.5,25){\parbox{28mm}{\theorem}}
+    \put(45,12){\color{gray}\puzzle}
+    \put(6.5,30){\parbox{35mm}{\theorem}}
+    \put(20,5){\color{gray}\Large\texttt{\_\_\_ \_\_\_\_\_\_ \_\_\_\_\_\_\_}}
 }
 
 \end{document}
